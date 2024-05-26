@@ -10,17 +10,17 @@ namespace TestProject1
         [TestMethod]
         public void ShouldCreateDisplay()
         {
-            // given
+            // Given
             decimal size = 24;
             DisplayResolution displayResolution = new DisplayResolution("FHD", 1920, 1080);
             PanelType panelType = PanelType.IPS;
             short refreshRate = 165;
             bool curved = false;
 
-            //when
+            // When
             Display display = new Display(size, displayResolution, panelType, refreshRate, curved);
 
-            //then
+            // Then
             Assert.AreEqual(size, display.Size);
             Assert.AreEqual(displayResolution, display.Resolution);
             Assert.AreEqual(panelType, display.PanelType);
@@ -30,14 +30,14 @@ namespace TestProject1
         [TestMethod]
         public void ShouldCalculatePixelsPerInch()
         {
-            //Given
+            // Given
             DisplayResolution displayResolution = new DisplayResolution("FHD", 1920, 1080);
             Display display = new Display(24m, displayResolution, PanelType.IPS, 165, false);
 
-            //When
+            // When
             decimal pixelsPerInch = Math.Round(display.PixelsPerInch, 1);
 
-            //Then
+            // Then
             Assert.AreEqual(91.8m, pixelsPerInch);
         }
     }

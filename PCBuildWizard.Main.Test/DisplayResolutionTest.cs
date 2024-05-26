@@ -8,15 +8,15 @@ namespace TestProject1
         [TestMethod]
         public void ShouldCreateDisplayResolution()
         {
-            //given
+            // Given
             string name = "QHD";
             int columns = 2560;
             int rows = 1440;
 
-            //when
+            // When
             DisplayResolution displayResolution = new DisplayResolution(name, columns, rows);
 
-            //then
+            // Then
             Assert.AreEqual(name, displayResolution.Name);
             Assert.AreEqual(columns, displayResolution.Columns);
             Assert.AreEqual(rows, displayResolution.Rows);
@@ -27,12 +27,12 @@ namespace TestProject1
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ShouldNotCreateDisplayResolutionWithInvalidName()
         {
-            //given
+            // Given
             string name = " ";
             int columns = 2560;
             int rows = 1440;
 
-            //when, then
+            // When, Then
             DisplayResolution displayResolution = new DisplayResolution(name, columns, rows);
 
         }
@@ -41,12 +41,12 @@ namespace TestProject1
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ShouldNotCreateColumnsWithInvalidNumber()
         {
-            //given
+            // Given
             string name = "QHD";
             int columns = 0;
             int rows = 1440;
 
-            //when, then
+            // When, Then
             DisplayResolution displayResolution = new DisplayResolution(name, columns, rows);
         }
 
@@ -54,26 +54,25 @@ namespace TestProject1
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ShouldNotCreateRowsWithInvalidNumber()
         {
-            //given
+            // Given
             string name = "QHD";
             int columns = 2560;
             int rows = -5;
 
-            //when, then
+            // When, Then
             DisplayResolution displayResolution = new DisplayResolution(name, columns, rows);
         }
 
         [TestMethod]
         public void ShouldCalculateDisplayResolutionPixels()
         {
-
-            //given
+            // Given
             DisplayResolution displayResolution = new DisplayResolution("QHD", 2560, 1440);
 
-            //when
+            // When
             int pixels = displayResolution.Pixels;
 
-            //then
+            // Then
             Assert.AreEqual(3_686_400m, pixels);
         }
     }
