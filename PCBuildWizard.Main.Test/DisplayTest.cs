@@ -1,4 +1,5 @@
-﻿using PCBuildWizard.Main.Domain.Products.Peripherals;
+﻿using FluentAssertions;
+using PCBuildWizard.Main.Domain.Products.Peripherals;
 using System.Net.NetworkInformation;
 using System.Xml.Linq;
 
@@ -21,10 +22,10 @@ namespace TestProject1
             Display display = new Display(size, displayResolution, panelType, refreshRate, curved);
 
             // Then
-            Assert.AreEqual(size, display.Size);
-            Assert.AreEqual(displayResolution, display.Resolution);
-            Assert.AreEqual(panelType, display.PanelType);
-            Assert.AreEqual(curved, display.Curved);
+            display.Size.Should().Be(size);
+            displayResolution.Should().Be(displayResolution);
+            display.PanelType.Should().Be(panelType);
+            display.Curved.Should().Be(curved);
         }
 
         [TestMethod]
@@ -38,7 +39,7 @@ namespace TestProject1
             decimal pixelsPerInch = Math.Round(display.PixelsPerInch, 1);
 
             // Then
-            Assert.AreEqual(91.8m, pixelsPerInch);
+            pixelsPerInch.Should().Be(91.8m);
         }
     }
 }

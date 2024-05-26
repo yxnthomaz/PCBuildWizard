@@ -1,3 +1,4 @@
+using FluentAssertions;
 using PCBuildWizard.Main.Domain.Products.Peripherals;
 
 namespace TestProject1
@@ -17,14 +18,12 @@ namespace TestProject1
             DisplayResolution displayResolution = new DisplayResolution(name, columns, rows);
 
             // Then
-            Assert.AreEqual(name, displayResolution.Name);
-            Assert.AreEqual(columns, displayResolution.Columns);
-            Assert.AreEqual(rows, displayResolution.Rows);
-
+            displayResolution.Name.Should().Be(name);
+            displayResolution.Columns.Should().Be(columns);
+            displayResolution.Rows.Should().Be(rows);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ShouldNotCreateDisplayResolutionWithInvalidName()
         {
             // Given
@@ -32,13 +31,15 @@ namespace TestProject1
             int columns = 2560;
             int rows = 1440;
 
-            // When, Then
-            DisplayResolution displayResolution = new DisplayResolution(name, columns, rows);
+            // When
+            var action = () => new DisplayResolution(name, columns, rows);
+
+            // Then
+            action.Should().ThrowExactly<ArgumentOutOfRangeException>();
 
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ShouldNotCreateColumnsWithInvalidNumber()
         {
             // Given
@@ -46,12 +47,14 @@ namespace TestProject1
             int columns = 0;
             int rows = 1440;
 
-            // When, Then
-            DisplayResolution displayResolution = new DisplayResolution(name, columns, rows);
+            // When
+            var action = () => new DisplayResolution(name, columns, rows);
+
+            // Then
+            action.Should().ThrowExactly<ArgumentOutOfRangeException>();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ShouldNotCreateRowsWithInvalidNumber()
         {
             // Given
@@ -59,8 +62,11 @@ namespace TestProject1
             int columns = 2560;
             int rows = -5;
 
-            // When, Then
-            DisplayResolution displayResolution = new DisplayResolution(name, columns, rows);
+            // When
+            var action = () => new DisplayResolution(name, columns, rows);
+
+            // Then
+            action.Should().ThrowExactly<ArgumentOutOfRangeException>();
         }
 
         [TestMethod]
@@ -73,7 +79,7 @@ namespace TestProject1
             int pixels = displayResolution.Pixels;
 
             // Then
-            Assert.AreEqual(3_686_400m, pixels);
+            pixels.Should().Be(3_686_400);
         }
     }
 }
